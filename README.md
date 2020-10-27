@@ -1,13 +1,28 @@
 # Chefing-test
 
+Version DEMO : https://chefing.noyeau.io/
 
 ## Configuration des environements
+
+### frontend
+Vous pouvez configurer les paramètres de connection à la BDD dans le fichier :
+front/src/environments/environment.ts
+
 ### backend
 Vous pouvez configurer les paramètres de connection à la BDD dans le fichier :
 back/src/environment.js
 
 
 ## Démarrage des applications
+
+### frontend
+```bash
+cd front/
+npm i
+npm start
+```
+Projet front dispo sur : http://localhost:4200 
+
 ### backend
 ```bash
 cd back/
