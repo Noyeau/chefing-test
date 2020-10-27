@@ -1,7 +1,14 @@
-<mat-toolbar>
+<mat-toolbar class="sticky-top" color="primary">
   <span>Ma liste de courses</span>
+  <div class="spacer"></div>
+  
+  <button  mat-icon-button (click)="createElem()">
+    <mat-icon>library_add</mat-icon>
+  </button>
 </mat-toolbar>
+
 <app-list (selectionChange)="elem = $event"></app-list>
+
 <!-- <div class="container">
   <div class="row">
     <div class="col-4">

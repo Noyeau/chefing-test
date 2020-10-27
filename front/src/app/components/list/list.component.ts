@@ -32,8 +32,13 @@ export class ListComponent implements OnInit {
   }
 
 
-  createElem(){
-    this.dialogService.openForm(null, "Créer un élément")
+
+  toogleFleg(elem){
+    elem.finish = !elem.finish
+    this.listService.saveElem(elem).subscribe()
   }
+
+
+
 
 }

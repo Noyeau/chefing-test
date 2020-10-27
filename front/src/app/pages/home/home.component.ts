@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogService } from 'src/app/services/dialog.service';
 
 
 @Component({
@@ -8,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   elem=null
-  constructor( ) { }
+  constructor(
+    private dialogService: DialogService
+  ) { }
 
   ngOnInit() {
+  }
+
+
+  createElem(){
+    this.dialogService.openForm(null, "Ajouter un élément")
   }
 }

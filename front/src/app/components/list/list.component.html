@@ -4,13 +4,23 @@
 
 <mat-list>
   <!-- <div mat-subheader>Folders</div> -->
-  <mat-list-item style="background-color: blue;" (click)="createElem()">
-    <div mat-line>Ajouter un élément</div>
-  </mat-list-item>
-  <mat-list-item *ngFor="let elem of list" (click)="selectElem(elem)">
-    <div mat-line>{{elem.label}}</div>
-    <mat-icon (click)="editElem(elem)">create</mat-icon>
+<ng-container *ngFor="let elem of list">
+  <mat-list-item  (click)="selectElem(elem)" [class.disabled]="elem.finish">
+
+    <div mat-line>
+      {{elem.label}}
+      <button  mat-icon-button (click)="editElem(elem)">
+        <mat-icon >create</mat-icon>
+        </button>
+    </div>
+
+    <button mat-icon-button (click)="toogleFleg(elem)" [color]="elem.finish ? 'accent' : 'primary'">
+      <mat-icon >{{elem.finish ? 'remove_shopping_cart':'add_shopping_cart'}}</mat-icon>
+    </button>
+
   </mat-list-item>
   <mat-divider></mat-divider>
+</ng-container>
+
   
 </mat-list>
