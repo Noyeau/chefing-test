@@ -1,7 +1,7 @@
 module.exports={
     cors:[ 'http://localhost:4200', "*"],
     mongodb:{
-        host: 'localhost',
+        host: '192.168.1.112',
         bdd: 'chefing',
     }
 }
