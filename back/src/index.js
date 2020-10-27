@@ -6,5 +6,5 @@ MongoService.init().then(res=>{
     console.log(res)
     App.init()
 }, err=>{
-    console.log(err)
+    console.log("Error MongoDB Connexion",err)
 })
