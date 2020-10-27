@@ -1,0 +1,16 @@
+<!-- <pre>
+{{list|json}}
+</pre> -->
+
+<mat-list>
+  <!-- <div mat-subheader>Folders</div> -->
+  <mat-list-item style="background-color: blue;" (click)="createElem()">
+    <div mat-line>Ajouter un élément</div>
+  </mat-list-item>
+  <mat-list-item *ngFor="let elem of list" (click)="selectElem(elem)">
+    <div mat-line>{{elem.label}}</div>
+    <mat-icon (click)="editElem(elem)">create</mat-icon>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  
+</mat-list>

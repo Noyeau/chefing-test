@@ -1,0 +1,11 @@
+<h1 mat-dialog-title *ngIf="data.title">{{data?.title}}</h1>
+
+<div mat-dialog-content>
+
+<app-edit-elem [datas]="data.data" (valid)="close()"></app-edit-elem>
+</div>
+
+<!-- <div mat-dialog-actions>
+  <button mat-button mat-dialog-close="false">Annuler</button>
+  <button mat-button [mat-dialog-close]="form?.value" [disabled]="!formOk()" cdkFocusInitial>Ok</button>
+</div> -->

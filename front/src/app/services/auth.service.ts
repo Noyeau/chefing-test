@@ -1,0 +1,112 @@
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+
+@Injectable({
+    providedIn:'root'
+})
+export class AuthService {
+    private apiUrl = environment.apiBackUrl
+
+
+    private _user: any;
+    private _authStatus$: BehaviorSubject<{ user: any, state: string, isConnected: boolean }> = new BehaviorSubject({ user: null, state: 'anonyme', isConnected: false })
+  
+  
+    private _jwtToken: string
+    public get jwtToken() {
+      if (this._jwtToken == null) {
+        return JSON.parse(localStorage.getItem('jwtToken'))
+      }
+      return this._jwtToken
+    }
+  
+    public set jwtToken(token) {
+      this._jwtToken = token
+      localStorage.setItem('jwtToken', JSON.stringify(token))
+    }
+  
+constructor(
+    private http: HttpClient
+) { }
+
+
+
+
+initApp() {
+    return new Observable(observer => {
+      if (this.jwtToken) {
+        return this.self().subscribe((res: any) => {
+          if (res) {
+            this._setConnected(res)
+            observer.next()
+          }
+        }, err => {
+          this.logOut()
+          observer.next()
+        })
+      }
+      observer.next()
+    })
+  }
+
+
+  getUser() {
+    return this._user
+  }
+
+
+  public login(email: string, password: string) {
+    return this.http.post(this.apiUrl + '/auth/login', { email, password }).pipe(map((res: any) => {
+      if (res.jwtToken) {
+        this.jwtToken = res.jwtToken
+        delete res.jwtToken
+      }
+      if (res.user) {
+        this._setConnected(res.user)
+        console.log("123", this.getAuthStatus().value.state)
+      }
+      return res
+    }))
+  }
+
+  self() {
+    return this.http.get(this.apiUrl + '/auth/self')
+  }
+
+  signIn(user){
+    return this.http.post(this.apiUrl + '/auth/signin', user).pipe(map((res: any) => {
+     console.log(res)
+    }))
+  }
+
+
+  private _setConnected(user) {
+    if (this._authStatus$.value.state !== 'connected') {
+      this._user = user
+      this._authStatus$.next({ user, state: 'connected', isConnected: true })
+    }
+  }
+
+  logOut() {
+    sessionStorage.removeItem('jwtToken')
+    this._authStatus$.next({ user: null, state: 'anonyme', isConnected: false })
+  }
+
+  getAuthStatus() {
+    return this._authStatus$
+  }
+
+
+  isConnected() {
+    return this._authStatus$
+      .pipe(
+        map((auth) => auth.state === 'connected')
+      )
+  }
+
+
+}
