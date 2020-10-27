@@ -17,6 +17,8 @@ import { ListComponent } from './components/list/list.component';
 import { EditElemComponent } from './components/edit-elem/edit-elem.component';
 import { FormDialogComponent } from './dialogs/form-dialog/form-dialog.component';
 import { InformationDialogComponent } from './dialogs/information-dialog/information-dialog.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,8 @@ import { InformationDialogComponent } from './dialogs/information-dialog/informa
     MaterialModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [httpInterceptorProviders],
   entryComponents: [
