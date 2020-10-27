@@ -40,7 +40,7 @@ app.use(routes)
 
 function init() {
     return new Promise((resolve) => {
-        http.listen(3000, function () {
+        http.listen(3001, function () {
             console.log('Example app listening on port 3000!')
             resolve()
         })
