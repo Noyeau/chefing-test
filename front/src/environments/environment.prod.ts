@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBackUrl:"http://localhost:3001"
+  apiBackUrl:"https://api-chefing.noyeau.io"
 };
