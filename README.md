@@ -4,13 +4,13 @@
 ## Configuration des environements
 ### backend
 Vous pouvez configurer les paramètres de connection à la BDD dans le fichier :
-back-api/src/environment.js
+back/src/environment.js
 
 
 ## Démarrage des applications
 ### backend
 ```bash
-cd back-api/
+cd back/
 npm i
 npm start
 ```

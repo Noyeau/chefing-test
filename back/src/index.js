@@ -1,4 +1,4 @@
-const MongoService = require('./mongodb-service')
+const MongoService = require('./services/mongodb')
 const App = require('./app')
 
 

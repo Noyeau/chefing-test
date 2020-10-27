@@ -15,7 +15,7 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerSpecs = swaggerJsdoc(swaggerOptions);
 
 
-
+const preprocessService = require('./services/preprocess')
 
 
 app.get('/swagger.json', (req, res) => {
@@ -28,6 +28,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 app.use(cors(corsOptions))
 app.use(bodyParser())
+
+
+  //Vérification de la Token si présente
+app.use(preprocessService.checkJwt)
+
 app.use(routes)
 
 
