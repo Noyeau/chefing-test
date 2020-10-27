@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongoService = require("../services/mongodb");
-var ObjectID = require('mongodb').ObjectID; 
+var ObjectID = require('mongodb').ObjectID;
 
 /**
  * @swagger
@@ -101,6 +101,30 @@ router.get('/', async (req, res) => {
     })
 })
 
+
+router.delete('/:id', (req, res) => {
+    if (!req.params.id) {
+        res.status(400).send({ erreur: "ID incorrect" })
+    }
+    if (!req.jwt || !req.jwt._id) {
+        res.status(400).send({ erreur: "Veuillez vous authentifier" })
+        return
+    }
+
+    mongoService.connectTo('userPieces').then(Pieces => {
+        Pieces.deleteOne({ _id: ObjectID(req.params.id) }).then(rep => {
+            if(rep.deletedCount){
+                res.send(rep.result)
+                return
+            }
+            res.status(404).send({msg:"Element introuvable"})
+        }, err => {
+            console.log(err)
+            res.status(400).send(err)
+        })
+
+    })
+})
 
 
 module.exports = router;
