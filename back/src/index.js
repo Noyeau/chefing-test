@@ -1,8 +1,9 @@
 const MongoService = require('./services/mongodb')
 const App = require('./app')
 
-
-MongoService.init().then(res=>{
-    console.log(res)
-    App.init()
+App.init()
+MongoService.init().then(res => {
+    console.log("Connexion mongoDB OK")
+}, (err) => {
+    console.log("Connexion mongoDB Error :",err)
 })

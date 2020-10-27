@@ -8,7 +8,7 @@ function init() {
     return new Promise((resolve, reject) => {
         MongoClient.connect(`mongodb://${environment.mongodb.host}`, { useUnifiedTopology: true }, function (error, client) {
             if (error) {
-                reject()
+                reject(error)
                 return
             };
             const db = client.db(dbName);
