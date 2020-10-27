@@ -21,7 +21,7 @@ export class ListComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.listService.getList().subscribe()
   }
   editElem(elem){
     console.log('edit', elem)

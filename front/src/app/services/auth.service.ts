@@ -92,7 +92,7 @@ initApp() {
   }
 
   logOut() {
-    sessionStorage.removeItem('jwtToken')
+    localStorage.removeItem('jwtToken')
     this._authStatus$.next({ user: null, state: 'anonyme', isConnected: false })
   }
 
