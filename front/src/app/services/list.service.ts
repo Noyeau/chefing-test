@@ -15,7 +15,6 @@ export class ListService {
     constructor(
         private http: HttpClient
     ) {
-        this.getList().subscribe()
     }
 
 
